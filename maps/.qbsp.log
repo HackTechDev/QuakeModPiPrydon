@@ -1,0 +1,72 @@
+TreeQBSP v2.05 -- 
+
+modified by Greg Lewis
+modified by Bengt Jardrup
+Linux port by gb
+
+Input file: moncurig2.map
+Output file: moncurig2.bsp
+---- LoadMapFile ----
+*** WARNING 02: Line 2094: Multiple info_player_start entities
+*** WARNING 02: Line 2098: Multiple info_player_start entities
+*** WARNING 02: Line 2102: Multiple info_player_start entities
+*** WARNING 02: Line 2107: Multiple info_player_start entities
+*** WARNING 02: Line 2194: Multiple info_player_start entities
+*** WARNING 02: Line 2199: Multiple info_player_start entities
+*** WARNING 02: Line 2204: Multiple info_player_start entities
+*** WARNING 02: Line 2210: Multiple info_player_start entities
+*** WARNING 06: No info_player_deathmatch entities in level
+Title: "Capel Curig (crap edition)"
+         1382 faces
+          229 brushes
+          275 entities
+           34 unique texnames
+          213 texinfo
+*** WARNING 01: No valid wadfiles in worldmodel
+
+Building hulls sequentially...
+Processing hull 0...
+---- Brush_LoadEntity ----
+          229 brushes
+---- CSGFaces ----
+         1377 brushfaces
+         1591 csgfaces
+         1314 mergedfaces
+---- SolidBSP ----
+         1959 split nodes
+          783 solid leafs
+         1170 empty leafs
+            7 water leafs
+         4122 leaffaces
+         3829 nodefaces
+*** WARNING 12: New portal was clipped away in CutNodePortals_r near (562 608 0)
+*** WARNING 12: New portal was clipped away in CutNodePortals_r near (576 -320 -32)
+*** WARNING 12: New portal was clipped away in CutNodePortals_r near (-412 -405 -32)
+---- FillOutside ----
+*** WARNING 10: Reached occupant at (-768 -832 80), npc
+Simplifying ... Leak file written to moncurig2.pts
+---- MakeFaceEdges ----
+---- GrowRegions ----
+Processing hull 1...
+Processing hull 2...
+---- WriteBSPFile ----
+          586 planes        11720
+         4744 vertexes      56928
+         1959 nodes         47016
+          213 texinfo        8520
+         3829 faces         76580
+         1396 clipnodes     11168
+         1178 leafs         32984
+         4122 marksurfaces   8244
+        15204 surfedges     60816
+         9906 edges         39624
+            0 textures          0
+              lightdata         0
+              visdata           0
+              entdata       17793
+
+14 warnings
+
+Elapsed time : 0:01
+
+Peak memory used : 1.8 MB

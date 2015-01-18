@@ -1,0 +1,63 @@
+TyrQBSP v0.4
+
+Input file: moncurig2.map
+Output file: moncurig2.bsp
+
+---- LoadMapFile ----
+*** WARNING 02: Multiple info_player_start entities
+*** WARNING 02: Multiple info_player_start entities
+*** WARNING 02: Multiple info_player_start entities
+*** WARNING 02: Multiple info_player_start entities
+*** WARNING 02: Multiple info_player_start entities
+*** WARNING 02: Multiple info_player_start entities
+*** WARNING 02: Multiple info_player_start entities
+*** WARNING 02: Multiple info_player_start entities
+*** WARNING 06: No info_player_deathmatch entities in level
+	 1382 faces
+	  229 brushes
+	  275 entities
+	   34 unique texnames
+	  213 texinfo
+
+*** WARNING 01: No valid WAD filenames in worldmodel
+Processing hull 0...
+---- Brush_LoadEntity ----
+	  229 brushes
+---- CSGFaces ----
+	 1377 brushfaces
+	 1644 csgfaces
+	 1304 mergedfaces
+---- SolidBSP ----
+	 2360 split nodes
+	  942 solid leafs
+	 1412 empty leafs
+	    7 water leafs
+	 4661 leaffaces
+	 4392 nodefaces
+---- Portalize ----
+	 1419 vis leafs
+	 4012 vis portals
+---- FillOutside ----
+*** WARNING 10: Reached occupant at (-469 -816 96), no filling performed.
+---- MakeFaceEdges ----
+---- GrowRegions ----
+Processing hull 1...
+Processing hull 2...
+---- WriteBSPFile ----
+	   585 planes          11700
+	  5447 vertexes        65364
+	  2360 nodes           56640
+	   213 texinfo          8520
+	  4392 faces           87840
+	  1371 clipnodes       10968
+	  1420 leafs           39760
+	  4661 marksurfaces     9322
+	 17417 surfedges       69668
+	 11315 edges           45260
+	     0 textures            0
+	       lightdata           0
+	       visdata             0
+	       entdata         17793
+
+1.192 seconds elapsed
+Peak memory usage: 9296834 (8.9M)

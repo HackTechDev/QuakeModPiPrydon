@@ -1,0 +1,506 @@
+<HTML>
+	<HEAD>
+		<TITLE>
+			Prydon Gate - Devkit
+		</TITLE>
+		<LINK REL=stylesheet HREF="stylesheet.css" TYPE="text/css">
+
+	</head>
+
+	</HEAD>
+	<BODY BGCOLOR="black" BGCOLOR="BLACK">
+
+<A NAME="toc"></A><h1>Table of Contents</h1>
+<ol>
+	<li><A HREF="#mapmaking">General Map Making</A>
+	<ol>
+		<li><A HREF="#mapnumber">Map Numbers</A>
+		<li><A HREF="#doors">Doors</A>
+		<li><A HREF="#signs">Signs & books</A>
+		<li><A HREF="#placing">Placing Items</A>
+		<li><A HREF="#drops">Item drops</a>
+		<li><A HREF="#misc">Misc</A>
+
+	</ol>
+	<li><A HREF="#quests">Quests</A>
+	<ol>
+		<li><A HREF="#story">Story Level</A>
+		<li><A HREF="#quest_ents">Quest Entities</A>
+		<li><A HREF="#quest_items">Quest items</A>
+	</ol>
+	<li><A HREF="#npcs">NPCs</A>
+	<ol>
+		<li><A HREF="#basics">Basics</A>
+		<li><A HREF="#dialogue">Dialogue</A>
+		<li><A HREF="#shops">Shops</A>
+		<li><A HREF="#actions">Actions</A>
+		<li><A HREF="#changes">Scripted Changes</A>
+	</ol>
+	<li><A HREF="#monsters">Monsters</A>
+	<ol>	
+		<li><A HREF="#info_class">Monster Classes</A>
+	</ol>
+	<li><A HREF="#cin">Cinematics</A>
+	<ol>	
+		<li><A HREF="#nonf">Not Working</A>
+	</ol>
+	
+	<li><A HREF="#tools">Tools & Appendices</A>
+	<ol>
+		<li><A HREF="#itemizer">Item code generator</A>
+		<li><A HREF="#ItemCodes">Constant & Special codes</A>
+		<li><A HREF="#namizer">Name code generator</a>
+	</ol>
+</ol>
+<A NAME="mapmaking"></A><h2>1. General Map Making</h2>
+	
+	<A NAME="doors"></A><h3>1.1. Map numbers</h3>
+		<p>Every map has to have a map number, it's set on the impulse key of worlspawn. This was supposed to be for multiple save points originally, but that use has faded. Primarily now map numbers are used for player spawn points. If the player spawn point's 'worldtype' key matches the map number of the previous map, that is where the player will spawn. This, for example allows you to spawn by the sewer entrance when you come from the sewer map in curig2.
+		
+	<A NAME="doors"></A><h3>1.2. Doors</h3>
+	
+		<p>Making doors isn't as easy as Quake, but it's not as hard as regular hipnotic rotating stuff. The first thing you need to do is create your door brush(es). Attach them to the "rotate_object" entity.</p>
+		<p>Rotate object can have a few properties:</p>
+		<ul>
+			<li><b>targetname</b> NEEDED This lets the blockwall know what object you're talking about. The door can also be triggered by this targetname, if the need arises. If it do trigger it by this name, the door will not 'lock' like specifying it on the func_blockwall
+			<li><b>target</b> NEEDED The targetname of an info_null used as the 'hinge' or center of rotation. Prydon Gate doesn't use this, it's discarded - but QBSP does! So be sure to specify it.
+			<li><b>noise1</b> The sounds the door makes as it opens. If not specified, it defaults to sounds/doors/door1.wav
+			<li><b>noise2</b> The sound the door makes as it closes. If not specified, it defaults to sounds/doors/close1.wav
+			<li><b>speed</b> The speed at which the door moves in degrees per second. If not specified, it defaults to 80.
+			<li><b>mangle</b> The door's final angle. If not specified, it defaults to '0 90 0', change this if you need the door to swing 
+			<li><b>wait</b> Delay before it closes, in seconds. If not specified, it's 5.
+		</ul>
+		<p>The next thing you need to do is either make a copy of your door, or it it's excessively detailed, a simple box shape roughly the same size will do. Then tie these brushes to func_blockwall. This entity is the blocking of the door
+		unlike Hipnotic or Quake, doors in Prydon are on or off deals. Either the blockwall blocks the way, or it's impassible.</p>
+		<p>The blockwall can have the following values set:</p>
+		<ul>
+			<li><b>target</b> NEEDED The targetname of the associated rotate_object.
+			<li><b>targetname</b> The targetname of the door for triggering. Note, if specified the door will only open if triggered.
+			<li><b>netname</b> The 'display name' or string the player sees when he hovers the cursor over it.
+		</ul>
+		<p>Note that to set up story parameters (see <A HREF="#story">Story Level</A> on a door, set them on the func_blockwall. So in short, a door consists of these three entities: rotate_object, func_blockwall and info_null. Note that regular Quake doos aren't supported, in fact no moving BSP entities are supported. If you want some
+		drop me a line and I'll see what I can do.</p>
+	<A NAME="signs"></A><h3>1.3. Signs & books</h3>
+		<p>Signs are crossed between a door and an NPC. They can display a large amount of text or (more commonly) a single phrase when the cursor hovers over it. Using them is easy, simply make some brush(es) in your map into the classname "sign" (I normally don't use prefixes such as func_ etc, so it's just sign). Then set the netname key to what you want to say. netname is the universal 'mouse over text' field, by the way. If what you want to say is a lot bigger than one or two lines (at 40 characters each) then you'll need to make it a clickable sign. To do add a "message" field. Here you can put as much text (be sure to put an \n after 40 chars) as your map editor will allow. Since I use worldcraft and it's profoundly weird (I think it might be related to a QBSPe token limit also) I've also added the ability to extend the message across multiple fields. You can make another piece of the message on message1, another on message2 and another on message3.</p>
+		<p>Signs do not dynamically respond to story changes, they do however check the story level when the map starts, they just don't respond if the story level changes while on that map. See <A HREF="#story">Story Level</A> for more details.
+	<A NAME="placing"></A><h3>1.4. Placing Items</h3>
+	
+	<p>There are four entities to place items directly into a level, the most basic of these is just "item". All other item placing entities just set up additional parameters and become 'item'. The other two are "shopitem", which has aditional code to make an item into a buyable object. The other two "magicitem" and "armoryitem" are shopitems with even more additional parms - however they also have special properities - they both will only spawn a specific class of item, magic shop stuff for magicitem and armory stuff for armoryitem.
+	<p>The principle value for any item placement is the key "items" this can be any item code (see <A HREF="#itemizer">Item code generator</A>.) In addition, and just like item drops, below, an item can have a "droprandom" field. Unlike drops, this should either be 1 or 0 since placed items do not have multiple inventory slots. droprandom is ignored on "magicitem" and "armoryitem", since these two are always randomized. Also any placed item can have a "menu" field, this will be the sale price of the item, if ever set the player must buy the object to pick it up. The "menu" field is automatically set tp the price of the item by the shopitem, armoryitem and magicitem entites.
+	<p>"netname" operates something like a targetname on items, it tells Prydon Gate what 'shop' this item is part of. This is automatically set to 'wepshop' on armoryitems and 'magshop' on magicitems. You'll really only need to set this if you're creating customized shop items using the 'shopitem' entity.
+	
+	<p>Also worth noting is the first spawnflag on all items is an 'infinite flag'. Setting this means that when purchased or picked up, the item doesn't go away. This is used to create limitless supplies of arrows, spears, throwing knves, and potions in the towns. It's really irritating when someone buys the last potion, and this prevents that from ever happening.
+	<p>So to recap, the "item" entity is what you should use for any generic item placement. If you want to place a specific sword by a dead body, say for example, then you'd place an item entity, grab the appropriate item code from the <A HREF="#itemizer">Item Code Generator</A> and you'd be all set. If you wanted just any old sword, do essentially the same thing, grab a generic code from <A HREF="#ItemCodes">the item codes list</a> and set droprandom to one.
+	<p>"armoryitem" is the the entity you need to make 'blacksmith shops'. Put one of these in and with no real configuration you'll have a armor shop. The same rings true for magicitem.
+	<p>"shoptiem" is what you need for making more advanced shops, or, recommended - a limitelss supply of heal potions. To make something like that, give the shopitem entity a items item code of 34 (taken from <A HREF="#ItemCodes">the list</A>), set spawnflags to one, and viola!
+	<A NAME="drops"></A><h3>1.4. Item drops</h3>
+	<p>Most everything in Prydon Gate can drop items. Most notably: monsters (info_class,monster_spawn), npcs, chests and barrels. This section applies to all of them. To this end everything has an inventory, just like the player. The inventory is stored in a series of fields. "slot1", "slot2", "slot3", "slot4", "slot5", "slot6", "slot7", and "slot8". These fields can contain any item code (see <A HREF="#itemizer">Item code generator</A>.). When killed or opened, the entity will drop all items in it's inventory. So you could easily drop just a golden axe by putting it's item code in the "slot1" field. Having the same items over and over can be a bit boring though, so there's a field called 'droprandom'. Droprandom is really a bitflags field. droprandom = 1 means to randomize slot1, droprandom = 2 means to randomize slot2, droprandom = 3 means to randomize both 1 and 2.  Now if drop random is set to randomize slot 1 for example and there's no item code in slot1 (0). It will either create A) A completely random item or B) Nothing at all. Actually, with droprandom there's always a chance nothing will be created. The code is limited in the number of times it can reroll until it gets a valid item setup, and if it exceeds that, the item is essentially removed. What that means in layman's terms, don't randomize anything you're counting on being there.
+	
+	<A NAME="misc"></A><h3>1.5. Misc</h3>
+	
+	<ul>
+	<li>'chest' = click on it, it opens. Drops stuff. See <A HREF="#drops">Item Drops</A></li>
+	<li>'barrel' = click on it, it explodes. Drops stuff. model configurable as "model". Sound configurable as "noise4"</li>
+	</ul>
+	
+<A NAME="quests"></A><h2>2. Quests</h2>
+	<A NAME="misc"></A><h3>2.1. Story Level</h3>
+	<p> Story level is the basic quest mechanism in the game. The game encodes a global story level and remembers it from map to map. There's actually two active story lines at any given time, the main story line and the 'optional quest story line'. The spawning or locking of everything is compared against the story value. If lower than the story_min key on something the object is locked or not spawned, if greater than or equal to story_max, the same. This results in a odd configuration. a story min of 2 and story_max of 3 means only level 2. It was an initial mistake in the code and it has just carried over. Sorry. Note: NPCs, monsters, barrels and most other ents are not spawned. Doors & chests, are locked. If an object isn't spawned due to story constraints.
+	<p>The story level can be controlled with two entities, the "storyup" entity can be used to advance the plot by it's 'lip' key or if lip is not specified, by 1. This entity is less useful than the other story control entity, storyset, but it's still supported since it was the first story entity I designed.
+	<p>storyset sets the story level to whatever the lip key says. It has two spawnflags as well, the first spawnflag indicates that the story set is to ignore the mask for optional quest/main story quest, and take whatever combined value the lip is set to. This could be used to clear the side quest while advancing the main plot. Or anything like that. In short it sets the progress of both storylines simultaneously if the first spawnflag is on. The second spawnflag tells Prydon Gate to clear the selected storyline. Since storyset with a lip of 0 is considered illegal, you need to specify story level 1 for either the main or optional quest and set the second spawnflag if you want 0.
+	
+	
+<A NAME="npcs"></A><h2>3. NPCs</h2>
+
+<A NAME="monsters"></A><h2>4. Monsters</h2>
+<A NAME="tools"></A><h2>5. Tools</h2>
+
+These are a few Javascript tools needed for editing Prydon Gate maps. You must have a javascript capable browser and have Javascript enabled.
+
+<SCRIPT Language="JavaScript">
+
+
+function ItemUpdate()
+{
+	var pref = document.ItemForm.pref.selectedIndex;
+	var suf = document.ItemForm.suf.selectedIndex;
+	var it = document.ItemForm.it.selectedIndex;
+	var dur = document.ItemForm.dur.value;
+	var max_dur = document.ItemForm.it.value;
+	var id = document.ItemForm.idd.checked;
+	if (!id)
+		id = -1;
+	var item = 0;
+	if (document.ItemForm.pref.value.substring(0, 1) == "+")
+		max_dur = Number(max_dur) + Number(document.ItemForm.pref.value);
+	else
+		max_dur = Math.ceil(max_dur * document.ItemForm.pref.value);
+	if (document.ItemForm.suf.value.substring(0, 1) == "+")
+		max_dur = Number(max_dur) + Number(document.ItemForm.suf.value);
+	else
+		max_dur = Math.ceil(max_dur * document.ItemForm.suf.value);
+	if (it == 0)
+	{
+		pref = 0;
+		suf = 0;
+	}
+	else if (it >= 32)
+		pref = 0;
+
+	if (it == 32)
+	{	
+		suf = 0;
+	}
+	else if (max_dur > 255)
+		max_dur = 255;
+	
+	if (dur > max_dur)
+		dur = max_dur;
+	else if (dur < 0)
+		dur = 0;
+		
+	if (it == 32)
+		item = 32 | ((dur & 255) * 65536) | ((dur & 16128) * 4);
+	else if (it > 31)
+		item = (((it - 31) * 32) | (suf * 1024) | (dur * 65536)) * id;
+	else
+		item = (it | (pref * 32) | (suf * 1024) | (dur * 65536)) * id
+	document.ItemForm.dur.value = dur;
+	document.ItemForm.max_dur.value = max_dur;
+	document.ItemForm.ItemOutput.value = item;
+	if (document.ItemForm.pref.selectedIndex != pref)
+	{
+		document.ItemForm.pref.selectedIndex = pref;
+		ItemUpdate();
+	}
+	if (document.ItemForm.suf.selectedIndex != suf)
+	{
+		document.ItemForm.suf.selectedIndex = suf;
+		ItemUpdate();
+	}
+
+}
+
+function UpdateName()
+{
+
+	var wostr = document.NameForm.Iname.value;
+
+	num = new Array(3);
+	num[0] = num[1] = num[2] = 0;
+	
+	if (wostr.length >= 1)
+		num[0] = num[0] + wostr.charCodeAt(0) * 65536;
+	if (wostr.length >= 2)
+		num[0] = num[0] + wostr.charCodeAt(1) * 256;
+	if (wostr.length >= 3)
+		num[0] = num[0] + wostr.charCodeAt(2);
+
+	if (wostr.length >= 4)
+		num[1] = num[1] + wostr.charCodeAt(3) * 65536;
+	if (wostr.length >= 5)
+		num[1] = num[1] + wostr.charCodeAt(4) * 256;
+	if (wostr.length >= 6)
+		num[1] = num[1] + wostr.charCodeAt(5);
+		
+	if (wostr.length >= 7)
+		num[2] = num[2] + wostr.charCodeAt(6) * 65536;
+	if (wostr.length >= 8)
+		num[2] = num[2] + wostr.charCodeAt(7) * 256;
+	if (wostr.length >= 9)
+		num[2] = num[2] + wostr.charCodeAt(8);
+	document.NameForm.Oname.value = num[0] + " " + num[1] + " " + num[2];
+}
+</SCRIPT>
+
+
+<A NAME="itemizer"></A><h3>6.1. Item code generator</h3>
+
+This generates item codes for <A HREF="#placing">placing items</A> or for <A HREF="#drops">item drops</A>. Set up the item the way you want and use the code number in the map.
+
+<table>
+<tr><th>Prefix</th><th>Item</th><th>Suffix</th><th>Qty/Dur</th><th>MAX</th>
+</tr>
+<tr>
+<td>
+
+<FORM NAME="ItemForm">
+<SELECT NAME="pref" OnChange="ItemUpdate()">
+<option value="1"></option>
+<option value="1">Broken</option>
+<option value="0.75">Damaged</option>
+<option value="1">Cursed</option>
+<option value="1">Useless</option>
+<option value="0.8">Rusted</option>
+<option value="0.1">Brittle</option>
+<option value="0.9">Cheap</option>
+<option value="1">Unwieldy</option>
+<option value="1">Rugged</option>
+<option value="1">Sharp</option>
+<option value="1">Quality</option>
+<option value="1">Lucky</option>
+<option value="1">Superior</option>
+<option value="1">Wizard's</option>
+<option value="1">Accurate</option>
+<option value="1">Deadly</option>
+<option value="1">Warrior's</option>
+<option value="1">Ultimate</option>
+<option value="+10">Silver</option>
+<option value="1">Vigorous</option>
+<option value="+30">Heavy</option>
+<option value="1">Thief's</option>
+<option value="1">Brutal</option>
+<option value="1">Fiery</option>
+<option value="1">Light</option>
+<option value="1">Rapid</option>
+<option value="1">Overpriced</option>
+<option value="+35">Golden</option>
+<option value="1">Thinker's</option>
+<option value="1">Titan's</option>
+<option value="1">Vile</option>
+</SELECT>
+
+</td>
+<td>
+
+<SELECT NAME="it" OnChange="ItemUpdate()">
+<option value="0">Empty</option>
+<option value="8">Cloth</option>
+<option value="40">Aketon</option>
+<option value="100">Chain Mail</option>
+<option value="125">Plate Mail</option>
+<option value="10">Dirk</option>
+<option value="30">Dagger</option>
+<option value="12">Sabre</option>
+<option value="20">Rapier</option>
+<option value="38">Broadsword</option>
+<option value="8">Club</option>
+<option value="50">Mace</option>
+<option value="13">Staff</option>
+<option value="30">Scepter</option>
+<option value="13">Hatchet</option>
+<option value="30">Axe</option>
+<option value="38">War Axe</option>
+<option value="1">Short Bow</option>
+<option value="1">Long Bow</option>
+<option value="1">War Bow</option>
+<option value="100">Knives</option>
+<option value="8">Buckler</option>
+<option value="18">Shield</option>
+<option value="45">Aegis</option>
+<option value="10">Skull Cap</option>
+<option value="22">Helm</option>
+<option value="30">Great Helm</option>
+<option value="12">Boots</option>
+<option value="30">Greaves</option>
+<option value="1">Amulet</option>
+<option value="200">Spears</option>
+<option value="200">Arrows</option>
+<option value="10000">Gold</option>
+<option value="100">Lesser Heal Potion</option>
+<option value="100">Heal Potion</option>
+<option value="100">Greater Heal Potion</option>
+<option value="100">Lesser Mana Potion</option>
+<option value="100">Mana Potion</option>
+<option value="100">Greater Mana Potion</option>
+<option value="1">Elixir</option>
+<option value="1">Book</option>
+<option value="255">Scroll</option>
+<option value="255">Scroll of Identify</option>
+</SELECT>
+
+</td>
+<td>
+
+<SELECT NAME="suf" OnChange="ItemUpdate()">
+<option value="1"></option>
+<option value="1">of the Fool</option>
+<option value="1">of the Weak</option>
+<option value="1">of the Clumsy</option>
+<option value="1">of the Slow</option>
+<option value="1">of Misfortune</option>
+<option value="0.1">of Fragility</option>
+<option value="1">of Corruption</option>
+<option value="1">of the Pit</option>
+<option value="1">of Illness</option>
+<option value="1">of Vitality</option>
+<option value="1">of the Vampire</option>
+<option value="1">of Luck</option>
+<option value="1">of Strength</option>
+<option value="1">of Intelligence</option>
+<option value="1">of Agility</option>
+<option value="1">of Regeneration</option>
+<option value="1">of Dexterity</option>
+<option value="1">of Poison</option>
+<option value="1">of the Leech</option>
+<option value="1">of Protection</option>
+<option value="1">of Health</option>
+<option value="1">of Giants</option>
+<option value="1">of the Heavens</option>
+<option value="1">of the Stars</option>
+<option value="1">of Mana</option>
+<option value="1">of Speed</option>
+<option value="1">of Flame</option>
+<option value="1.4">of Quality</option>
+<option value="1">of the Bear</option>
+<option value="1">of Wizardry</option>
+<option value="1">of Bashing</option>
+<option value="1">of Haste</option>
+<option value="1">of Fighting</option>
+<option value="1">of Slaughter</option>
+<option value="1">of Vim</option>
+<option value="1">of Accuracy</option>
+<option value="1">of the Magi</option>
+<option value="0">of the Ages</option>
+<option value="1">of Thorns</option>
+<option value="1">of Spikes</option>
+<option value="1">of Fire</option>
+<option value="1">of Shock</option>
+<option value="1">of Bounty</option>
+<option value="1">of the Mind</option>
+<option value="1">of Power</option>
+<option value="+15">of Kings</option>
+<option value="1">of Ease</option>
+<option value="1">of Fireball</option>
+<option value="1">of Zap</option>
+<option value="1">of Slow</option>
+<option value="1">of Warp</option>
+<option value="1">of Poisonball</option>
+<option value="1">of Leech Life</option>
+<option value="1">of Heal</option>
+<option value="1">of Shield</option>
+<option value="1">of Transmute</option>
+<option value="1">of Repel</option>
+<option value="1">of Nova</option>
+<option value="1">of Twister</option>
+<option value="1">of Teleport</option>
+<option value="1">of Summon</option>
+<option value="1">of Meteor</option>
+<option value="1">of Evile</option>
+
+</SELECT>
+</td>
+<td>
+
+<INPUT TYPE="Number" Size="5" MAXLENGTH="5" NAME="dur" OnChange="ItemUpdate()">
+</td><td>
+<INPUT TYPE="Number" Size="5" MAXLENGTH="5" READONLY NAME="max_dur">
+</td>
+<td>
+
+<INPUT NAME="idd" TYPE=CHECKBOX OnChange="ItemUpdate()" checked> Identified
+</td>
+</tr>
+<tr>
+<td colspan=6> 
+Item code: <INPUT TYPE="Number" READONLY NAME="ItemOutput">
+</td></tr>
+</table>
+
+</FORM>
+
+<A NAME="ItemCodes"></A><h3>6.2. Constant & Special Codes</h3>
+
+<p>When using drop random there's a number of item codes that may come in handy. These item codes are essentially the bare value of an item, and allows the randomizer to fill in the details.
+
+<table border=1>
+<tr><th>Name</th><th>Value</th></tr>
+
+<tr><td>Cloth</td><td>1</td></tr>
+<tr><td>Aketon</td><td>2</td></tr>
+<tr><td>Chain Mail</td><td>3</td></tr>
+<tr><td>Plate Mail</td><td>4</td></tr>
+<tr><td>Dirk</td><td>5</td></tr>
+<tr><td>Dagger</td><td>6</td></tr>
+<tr><td>Sabre</td><td>7</td></tr>
+<tr><td>Rapier</td><td>8</td></tr>
+<tr><td>Broadsword</td><td>9</td></tr>
+<tr><td>Club</td><td>10</td></tr>
+<tr><td>Mace</td><td>11</td></tr>
+<tr><td>Staff</td><td>12</td></tr>
+<tr><td>Scepter</td><td>13</td></tr>
+<tr><td>Hatchet</td><td>14</td></tr>
+<tr><td>Axe</td><td>15</td></tr>
+<tr><td>War Axe</td><td>16</td></tr>
+<tr><td>Short Bow</td><td>17</td></tr>
+<tr><td>Long Bow</td><td>18</td></tr>
+<tr><td>War Bow</td><td>19</td></tr>
+<tr><td>Knives</td><td>20</td></tr>
+<tr><td>Buckler</td><td>21</td></tr>
+<tr><td>Shield</td><td>22</td></tr>
+<tr><td>Aegis</td><td>23</td></tr>
+<tr><td>Skull Cap</td><td>24</td></tr>
+<tr><td>Helm</td><td>25</td></tr>
+<tr><td>Great Helm</td><td>26</td></tr>
+<tr><td>Boots</td><td>27</td></tr>
+<tr><td>Greaves</td><td>28</td></tr>
+<tr><td>Amulet</td><td>29</td></tr>
+<tr><td>Spears</td><td>30</td></tr>
+<tr><td>Arrows</td><td>31</td></tr>
+<tr><td>>Gold</td><td>32</td></tr>
+<tr><td>Lesser Heal Potion</td><td>33</td></tr>
+<tr><td>Heal Potion</td><td>34</td></tr>
+<tr><td>Greater Heal Potion</td><td>35</td></tr>
+<tr><td>Lesser Mana Potion</td><td>36</td></tr>
+<tr><td>Mana Potion</td><td>37</td></tr>
+<tr><td>Greater Mana Potion</td><td>38</td></tr>
+<tr><td>Elixir</td><td>39</td></tr>
+<tr><td>Book</td><td>40</td></tr>
+<tr><td>Scroll</td><td>41</td></tr>
+<tr><td>Scroll of Identify</td><td>42</td></tr>
+</table>
+
+
+Quest item codes.
+<p>
+<script language="javascript">
+<!--
+var i = 1;
+while (i < 63)
+{
+document.write(i*1024);
+document.write(", ");
+i++;
+}
+// -->
+</script>
+<p>
+Note: 1024 is used by Curse of Korweh for The Eye of Kor.
+
+<A NAME="namizer"></A><h3>6.3. Name Code</h3>
+
+This creates name codes for creating monsters and/or quest items. You do not need this for NPCs or Bosses, as they use plain text. There's a <b>maximum length of 9 characters</b>. I realize this is kinda limiting, but TOO BAD.
+
+
+<FORM Name="NameForm">
+<table border = 1>
+<tr><th>Name</th><th>Code</th></tr><tr><td>
+<INPUT MAXLENGTH="9" TYPE="TEXT" NAME="Iname" OnChange="UpdateName()">
+</td><td><INPUT TYPE="TEXT" READONLY NAME="Oname"></td>
+</tr>
+</table>
+</FORM>
+
+
+<A NAME="namizer"></A><h3>6.4. Storyline Values</h3>
+
+<table border = 1>
+<tr><th>Stage</th><th>Number</th><th>Stage</th><th>Number</th></tr>
+<tr><td>Main Story #1</td><td>1</td><td>Optional Story #1</td><td>16</td>
+<tr><td>Main Story #2</td><td>2</td><td>Optional Story #2</td><td>32</td>
+<tr><td>Main Story #3</td><td>3</td><td>Optional Story #3</td><td>48</td>
+<tr><td>Main Story #4</td><td>4</td><td>Optional Story #4</td><td>64</td>
+<tr><td>Main Story #5</td><td>5</td><td>Optional Story #5</td><td>80</td>
+<tr><td>Main Story #6</td><td>6</td><td>Optional Story #6</td><td>96</td>
+<tr><td>Main Story #7</td><td>7</td><td>Optional Story #7</td><td>112</td>
+<tr><td>Main Story #8</td><td>8</td><td>Optional Story #8</td><td>128</td>
+<tr><td>Main Story #9</td><td>9</td><td>Optional Story #9</td><td>144</td>
+<tr><td>Main Story #10</td><td>10</td><td>Optional Story #10</td><td>160</td>
+<tr><td>Main Story #11</td><td>11</td><td>Optional Story #11</td><td>176</td>
+<tr><td>Main Story #12</td><td>12</td><td>Optional Story #12</td><td>192</td>
+<tr><td>Main Story #13</td><td>13</td><td>Optional Story #13</td><td>208</td>
+<tr><td>Main Story #14</td><td>14</td><td>Optional Story #14</td><td>224</td>
+<tr><td>Main Story #15</td><td>15</td><td>Optional Story #15</td><td>240</td>
+</table>
+</BODY>
+</HTML>

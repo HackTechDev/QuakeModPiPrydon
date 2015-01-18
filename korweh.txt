@@ -1,0 +1,191 @@
+                                                                             
+   ‹‹‹‹    ‹‹                             ‹‹‹‹                               
+ ‹ﬂ‹‹‹‹ﬂ‹ﬂﬂ  ﬂ‹‹                        ‹ﬂ ‹‹‹€                              
+ € €‹ € ‹ﬂﬂﬂﬂ‹  €                       € €‹                                 
+ ﬂ‹‹ﬂ € €     ﬂ‹ €                       ﬂ‹ €                                
+      € €      € € ‹‹‹ ‹‹‹   ‹‹    ‹‹‹   ‹‹ﬂ ﬂﬂ‹‹    ‹‹‹‹‹    ‹‹‹  ‹‹‹       
+      € €      € €€‹‹ ﬂ€‹ ﬂ‹€‹‹ﬂ‹ ﬂ‹‹‹ﬂ€€ €ﬂﬂﬂﬂ‹ﬂ‹  €‹‹‹ ﬂ‹  €‹‹ ﬂ€‹‹ ﬂﬂ‹    
+      € €      € €  € € ﬂ€‹€  € €    € € €     € €‹ﬂ€   ﬂ‹ ﬂ‹  € €   ﬂ€ €    
+      € €      € €  € €  ﬂﬂ   € €    € € €     € €€ €     € €  € €    € €    
+      € €      € €  € €       € €    € € €     € €€ €     € €  € €    € €    
+      € €‹‹‹‹ﬂﬂ‹ﬂﬂ  € ﬂ‹‹‹    €‹ ﬂﬂ‹€€ €‹‹ﬂﬂﬂ‹€€ﬂﬂﬂ‹€‹‹ ‹ﬂ‹‹ﬂ  € ﬂ‹‹  € €    
+      € €ﬂﬂ‹‹ﬂﬂ      ﬂ€ﬂﬂ       ﬂﬂ€ﬂﬂ€ €  ﬂ€‹ﬂ       ﬂﬂ€ﬂﬂ     ﬂ€‹ﬂ    ﬂ‹ﬂﬂ  
+      € ﬂ‹                           € €                                     
+      ﬂ‹  ﬂ‹‹‹                 ‹ﬂ€€ﬂ €‹€                                     
+        ﬂ‹‹‹‹ﬂ                 ﬂ‹€€‹€ﬂ                                       
+                                                                             
+                               The Curse of Korweh v1.1                         
+                               ‹                                             
+                             ‹€ﬂﬂ‹‹‹                                         
+                           ‹€ﬂ ﬂ‹‹‹ﬂﬂ                €€                      
+                          ‹ﬂ€                       €€                       
+                          €€              ‹‹‹     ‹ﬂ ﬂﬂﬂ‹     ‹‹‹            
+                         € €  ‹€€€ﬂﬂﬂ€ ‹ﬂ€‹‹ ﬂ‹  ﬂﬂ€ €ﬂ€€  ‹ﬂ€‹‹ ﬂ‹          
+                         € € € €‹€€ € €‹ﬂ   ﬂ‹ €   € €    € €   ﬂ‹ €         
+                         € ﬂ‹ﬂ€‹‹ﬂ€ €  €ﬂﬂﬂ€‹€ €   € €    € €‹‹‹‹€ﬂ          
+                          €  €‹   € € € €ﬂﬂﬂ € €   € €  ‹‹€ €ﬂﬂ  €ﬂ‹         
+                           ﬂ‹ ﬂ‹‹€€ﬂ  € ﬂﬂ‹‹‹€ €‹  €‹ﬂ‹‹€ﬂﬂ‹ ﬂ‹‹‹ﬂ €         
+                             ﬂ‹‹‹ﬂ     ﬂ‹‹‹ﬂ ﬂ‹€ﬂ    €‹‹ﬂ  ﬂﬂ‹‹‹‹‹ﬂ          
+                                                                             
+
+
+Released December 2nd, 2003
+
+
+ATTENTION
+---------
+
+This demo should be considered BETA quality and not representative of the
+final game. This demo is being released as an appeal to the Quake and gaming
+community for help. If you'd like to help develop this game, please contact
+the authors at frikac@inside3d.com.
+
+This version REQUIRES Quake to run. The full game most likely will not. The
+reason is we don't yet have enough original sounds and content.
+
+
+About
+-----
+
+The Curse of Korweh is an add on side mission to the story of Prydon Gate.
+It takes place in a mysterious and ancient desert in the eastern part of
+Prydon. This version of Korweh comes bundled with an updated version of the
+Prydon Gate demo, enabling you to play the new maps alongside the original
+demo. This is not the full release of the game. That will come later,
+maybe.
+
+
+The Curse of Korweh
+-------------------
+A thousand years ago people believed in the gods of the ancient and extinct
+Namus. They believed that Kor created the world in a great cataclysm of
+flame and earth. Feeling the need to tie their beliefs to the land of their
+heritage, they adopted the idea that the great eastern desert of Prydon
+was a sacred ground of Kor, a meeting place for him to meet with his
+children. A great temple was built in the heart of the desert to honor Kor
+and believers treked into the many miles to pay tribute to the all powerful
+god of fire. The desert and temple itself both became known as "Korweh" or
+"Kor's home on earth".
+
+It was all too easy to become lost or killed in the vast deserts of Korweh.
+Carrying food and gold to offer to Kor, these unarmed and unprepared pilgrims
+soon became easy targets for a vicious group of bandits. They called themselves
+the Takers, deriving from "Ta Kor" or "those against Kor". Though their name
+suggested they had some sort of religious origin, they were nothing more than
+common thieves. The thieves, preying up on the most faithful, including the
+priesthood of the Kor sect had all but wiped them out. Then a great cataclysm
+befell the land of Prydon. As Ithael travels back from lands far to the north
+he hears a tale of an object that may prove useful-
+
+The Eye of Kor, a mysterious trinket forged in the laval caves of the Korweh
+desert and held as a remanant of the god Kor himself, is rumored to dispell
+any magic. Travel into the desert and find the long lost Eye of Kor. IT IS
+YOUR DESTINY or something.
+
+What's Included
+---------------
+4 maps set in the deserts of Korweh
+Updated Capel Curig map for getting there.
+New monsters - scorpions, bandits, and what have you.
+
+
+Installation
+------------
+This version of Curse of Korweh is included with Prydon Gate demo. Please read
+readme.txt for details on installing it.
+
+Thanks and Credits
+------------------
+Thanks to Error & WiseWolf for models that didn't get used this time around.
+
+Thanks to Independant Reality, maker of almost all of the music I've used (see the
+mp3.com site: http://artists.mp3s.com/artists/17/independent_reality.html ). Music
+recieved by way of Nathan Ostgard.
+
+Thanks also to Edgen, maker of the fine music (I think I used 1 of his tracks)
+See: http://www.edgen.com/ . Music recieved by way of flashkit.
+
+Credits
+-------
+
+Contains original artwork by: Randy, FrikaC
+(Ugly, hideous) Maps by FrikaC
+(Beautiful, wonderful) Code by FrikaC
+Story and Design by FrikaC
+Play testing by Quest, Static_Fiend and Error
+
+Help and Troubleshooting
+------------------------
+
+If you need help please post on http://forums.inside3d.com or send a mail to
+frikac@inside3d.com. Be sure to put "Prydon Gate" in the topic. I will not
+respond 'good job' or 'you suck' mails, As these do not demand a reply.
+Replies may be delayed or may not come at all, depending on the content of
+the message. If you want fast help, use the above stated forum.
+
+Bug reports are appreciated, if possible make a save game at the point the
+bug occurred in game, and provide a method for reproducing the bug. Credit
+will be given.
+
+
+Future
+------
+
+If you'd like to help with Prydon Gate and are a competent mapper (meaning you
+can make maps better than seen in this demo). I urge you to help.
+
+If you can model for Quake, we need your help. The majority of models in this
+game are either substandard or we're not satisfied with the license under
+which we obtained them (*cough*). If you can improve upon or merely substitute
+just about any model in the game, we'd appreciate it.
+
+If you have an 'interesting voice' and would like to play a role of one of the
+characters in the mod, great! Send us a sample of your voice via e-mail and
+we can probably find a character for you. But if we don't find enough people
+willing to do voices, don't be surprised if we don't get back to you.
+
+If you can create sound effects or know of some royalty free sounds which we
+can use, we need your help! Many sounds of this mod need to be replaced to
+become a stand alone game.
+
+
+Copyright and Distribution
+--------------------------
+
+All original material shouldn't be stolen and reused, but it will be so 
+I don't care anyway. You can mirror this file, modify this file or use this
+file as a head rest, but you may not claim this file or portions of it as your
+own, that just irks me. If you're thinking about doing something with this file
+outside of what you're supposed to do, stop thinking about it and go get a
+drink and maybe watch some TV. Your whole life shouldn't be doing illegal
+things with this file. Get out, live a little, it will do you some good. In
+fact, stop reading this readme, it's a big waste of your time. Everything
+we own belongs to us and usually nobody else. That's what ownership is really
+all about. As such, we own it and we're just letting you use and distribute it.
+That's the basics right there. It's like if I handed you a watch, and said you
+could use it for the day. This doesn't suddenly become your watch, you can't go
+brag to your friend "hey look at my new watch!", that'd be wrong. So just don't
+do that with this file. Sure, if you want to make a mod and use some files we 
+made that are in this file we'll let you, but don't just redress the mod and
+rerelease it, that's like putting some red paint on the watch and claiming
+it's an entirely different watch. The persons portrayed in this demo don't
+actually exist and we have no proof they ever existed so any resemblance to
+persons living or undead is purely coincidental. Locations in this demo
+actually do exist, but they're not as cute as we make them seem. They are
+horrid horrid places as most of them are in Britain. Not that I have anything
+against Britain, but they're just... you know. Some of my best friends are from
+Britain in fact so don't start accusing me of hating Britain. Oh, King Morgan
+is an actual historical figure so scratch that last thing about never existing.
+Chances are he won't sue us though since he died over a 1000 years ago. 
+
+(C) Copyright 2002-2003. All rights reserved.
+ 
+ 
+Availability
+------------
+
+The Curse of Korweh is available from the following location:
+
+http://www.inside3d.com/prydongate/
+
+

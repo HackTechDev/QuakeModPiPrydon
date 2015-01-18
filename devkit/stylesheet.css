@@ -1,0 +1,23 @@
+BODY
+{
+    FONT-SIZE: 8pt;
+    BACKGROUND-ATTACHMENT: fixed;
+    BACKGROUND-IMAGE: url(background.png);
+    COLOR: white;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Verdana;
+    margin: 0px;
+}
+BLOCKQUOTE
+{
+    BACKGROUND-COLOR: #1f1f1f
+}
+HR
+{
+    COLOR: black
+}
+DIV.headline
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 10pt
+}

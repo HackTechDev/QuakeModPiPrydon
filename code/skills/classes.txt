@@ -1,0 +1,63 @@
+
+F = fighter/warrior
+W = wizard
+T = thief
+
+1 0 = Outlander ()
+2 1 = Neophyte (W)
+3 3 = Conjurer (WW)
+4 4 = pickpocket (T)
+5 5 = Trickster (TW)
+6 7 = Bard (TWW)
+7 12 = Highwayman (TT)
+8 13 = Stalker (TTW)
+9 15 = Warlock (TTWW)
+10 16 = Recruit (F)
+11 17 = Monk (FW)
+12 19 = Friar (FWW)
+13 20 = Vandal (FT)
+14 21 = Journeyman (FTW)
+15 23 = Pretender (FTWW)
+16 28 = Outlaw (FTT)
+17 29 = Scoundrel (FTTW)
+18 48 = Fighter (FF)
+19 49 = Avenger (FFW)
+20 51 = Paladin (FFWW)
+21 52 = Barbarian (FFT)
+22 53 = Combatant (FFTW)
+23 60 = Pirate (FFTT)
+24 67 = Mage (WWW)
+25 71 = Druid (TWWW)
+26 76 = Robber (TTT)
+27 77 = Shadowmaster (TTTW)
+28 83 = Cleric (FWWW)
+29 92 = Rogue (FTTT)
+30 112 = Warrior (FFF)
+31 113 = Champion (FFFW)
+32 116 = Gladiator (FFFT)
+33 198 = Wizard (WWWW)
+34 206 = Thief (TTTT)
+35 240 = Knight (FFFF)
+
+Thief
+-----
+sneak
+pick locks
+leap
+assasin shot (ranged skill, silent, deadly, slow)
+ranged weapons increase (+tohit)
+steal
+disarm (?)
+traps? bait?
+
+Wizard
+------
+identify
+mana use decrease
+
+
+Knight
+------
+Repair
+prone/block
+toughness (AC increase?)

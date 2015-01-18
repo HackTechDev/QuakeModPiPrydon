@@ -1,0 +1,17 @@
+----- Light 1.43 ----
+
+modified by Bengt Jardrup
+Linux port by gb
+
+File: moncurig2.bsp
+275 entities read, 115 are lights, 3829 faces, 21.3M casts
+WARNING: Entity at (534 -521 58) (npc) has unmatched target 'm_sell'
+WARNING: Entity at (534 -521 58) (npc) has unmatched target 'm_identify'
+WARNING: Entity at (80 112 64) (npc) has unmatched target 'm_save'
+WARNING: Entity at (80 112 64) (npc) has unmatched target 'm_exit'
+WARNING: Entity at (-808 -112 48) (npc) has unmatched target 'm_repair'
+WARNING: Entity at (-808 -112 48) (npc) has unmatched target 'm_sell'
+
+lightdatasize: 120 kb
+
+Elapsed time :  0:07

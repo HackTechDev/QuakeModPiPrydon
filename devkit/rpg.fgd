@@ -1,0 +1,663 @@
+
+
+//
+// worldspawn
+//
+
+@SolidClass = worldspawn : "World entity"
+[
+	message(string) : "Text on entering the world"
+	sounds(integer) : "CD track to play" : 1
+	light(integer) : "Default light level"
+	noise(string) : "Music"
+	impulse(integer) : "Map number"
+]
+
+//
+// base marker definitions
+//
+
+@baseclass = Appearflags [
+	spawnflags(Flags) =
+	[
+		256 : "Not in Easy" : 0
+		512 : "Not in Normal" : 0
+		1024 : "Not in Hard" : 0
+		2048 : "Not in Deathmatch" : 0
+	]
+]
+
+@baseclass = Story [
+	story_max(Choices) : "Maximum story level" : 0 =
+	[
+		0 : "None"
+		1 : "Main Stage 1"
+		2 : "Main Stage 2"
+		3 : "Main Stage 3"
+		4 : "Main Stage 4"
+		5 : "Main Stage 5"
+		6 : "Main Stage 6"
+		7 : "Main Stage 7"
+		8 : "Main Stage 8"
+		9 : "Main Stage 9"
+		10 : "Main Stage 10"
+		11 : "Main Stage 11"
+		12 : "Main Stage 12"
+		13 : "Main Stage 13"
+		14 : "Main Stage 14"
+		15 : "Main Stage 15"
+		16 : "Optional Stage 1"
+		32 : "Optional Stage 2"
+		48 : "Optional Stage 3"
+		64 : "Optional Stage 4"
+		80 : "Optional Stage 5"
+		96 : "Optional Stage 6"
+		112 : "Optional Stage 7"
+		128 : "Optional Stage 8"
+		144 : "Optional Stage 9"
+		160 : "Optional Stage 10"
+		176 : "Optional Stage 11"
+		192 : "Optional Stage 12"
+		208 : "Optional Stage 13"
+		224 : "Optional Stage 14"
+		240 : "Optional Stage 15"
+	]
+	story_min(Choices) : "Minimum story level" : 0 =
+	[
+		0 : "None"
+		1 : "Main Stage 1"
+		2 : "Main Stage 2"
+		3 : "Main Stage 3"
+		4 : "Main Stage 4"
+		5 : "Main Stage 5"
+		6 : "Main Stage 6"
+		7 : "Main Stage 7"
+		8 : "Main Stage 8"
+		9 : "Main Stage 9"
+		10 : "Main Stage 10"
+		11 : "Main Stage 11"
+		12 : "Main Stage 12"
+		13 : "Main Stage 13"
+		14 : "Main Stage 14"
+		15 : "Main Stage 15"
+		16 : "Optional Stage 1"
+		32 : "Optional Stage 2"
+		48 : "Optional Stage 3"
+		64 : "Optional Stage 4"
+		80 : "Optional Stage 5"
+		96 : "Optional Stage 6"
+		112 : "Optional Stage 7"
+		128 : "Optional Stage 8"
+		144 : "Optional Stage 9"
+		160 : "Optional Stage 10"
+		176 : "Optional Stage 11"
+		192 : "Optional Stage 12"
+		208 : "Optional Stage 13"
+		224 : "Optional Stage 14"
+		240 : "Optional Stage 15"
+	]
+]
+@baseclass = Targetname [ targetname(target_source) : "Name" ]
+@baseclass = Target 
+[
+target(target_destination) : "Target"
+target1(target_destination) : "Target 1"
+target2(target_destination) : "Target 2"
+target3(target_destination) : "Target 3"
+]
+
+//
+// player starts, deathmatch, coop, teleport
+//
+
+@baseclass base(Appearflags) size(-16 -16 -24, 16 16 32) 
+	color(0 255 0) = PlayerClass []
+
+@PointClass base(PlayerClass) = info_player_start : "Player 1 start" 
+[
+	worldtype(integer) : "Last level number"
+]
+@PointClass base(Targetname) = info_null : "info_null (spotlight target)" []
+
+
+@baseclass = ItemDrops 
+[
+	droprandom(Choices) : "Item drop randomize" : 0 =
+	[
+		0 : "Nothing"
+		1 : "1 Item"
+		3 : "2 Items"
+		7 : "3 Items"
+		15 : "4 Items"
+		31 : "5 Items"
+		63 : "6 Items"
+		127 : "7 Items"
+		255 : "8 Items"
+	]
+	slot1(integer) : "Specific Item 1" : 0
+	slot2(integer) : "Specific Item 2" : 0
+	slot3(integer) : "Specific Item 3" : 0
+	slot4(integer) : "Specific Item 4" : 0
+	slot5(integer) : "Specific Item 5" : 0
+	slot6(integer) : "Specific Item 6" : 0
+	slot7(integer) : "Specific Item 7" : 0
+	slot8(integer) : "Specific Item 8" : 0
+]
+
+// Monsters and bonus crap
+@baseclass = AIValues
+[
+	ai(Choices): "AI Value" :  0 =
+	[
+		0 : "Default"
+		1 : "Roam"
+		2 : "Attack Player"
+		3 : "Roam and Attack Player"
+		4 : "Attack monsters"
+		5 : "Roam and Attack monsters"
+		6 : "Attack monsters and Player"
+		7 : "Roam and Attack monsters, Player"
+		8 : "Follow player"
+		9 : "Roam and Follow player"
+		12 : "Follow player and Attack monsters"
+		13 : "Roam, follow player and Attack monsters"
+		64 : "Be a lump"
+	]
+]
+
+@baseclass = Actions
+[
+	gotstuff(Choices) : "Primary attack/action" : 0 =
+	[
+		0 : "None"
+		1 : "Fireball"
+		2 : "Zap"
+		3 : "Slow"
+	//	4 : "Warp"
+		5 : "Poisonball"
+		6 : "Leech"
+		7 : "Heal self"
+		8 : "Shield"
+	//	9 : "Transmute"
+		10 : "Repel"
+		11 : "Nova"
+		12 : "Twister"
+		13 : "Teleport"
+		14 : "Summon"
+		15 : "Meteor"
+		16 : "Evile"
+	//	17 : "Walk"
+	//	18 : "Activate"
+		19 : "Melee Attack"
+		20 : "Arrow Attack"
+		21 : "Throw Attack"
+	//	22 : "Follow"
+		23 : "Heal other"
+	]
+	spell(Choices) : "Secondary attack/action" : 0 =
+	[
+		0 : "None"
+		1 : "Fireball"
+		2 : "Zap"
+		3 : "Slow"
+	//	4 : "Warp"
+		5 : "Poisonball"
+		6 : "Leech"
+		7 : "Heal self"
+		8 : "Shield"
+	//	9 : "Transmute"
+		10 : "Repel"
+		11 : "Nova"
+		12 : "Twister"
+		13 : "Teleport"
+		14 : "Summon"
+		15 : "Meteor"
+		16 : "Evile"
+	//	17 : "Walk"
+	//	18 : "Activate"
+		19 : "Melee Attack"
+		20 : "Arrow Attack"
+		21 : "Throw Attack"
+	//	22 : "Follow"
+		23 : "Heal other"
+	]
+]
+
+@baseclass base(Appearflags, Story, AIValues) size(-16 -16 -24, 16 16 32) color(220 0 0) = Monster 
+[]
+@PointClass base(Monster, ItemDrops, Story) color(0 220 0) = barrel : "Bonus barrel"
+[
+	netname(string) : "Display name"
+	model(string) : "Model"
+	noise4(string) : "Break sound"
+	
+]
+@PointClass base(ItemDrops, Targetname, Story) size(-16 -16 0, 16 16 30) color(0 220 0) = chest : "Bonus chest"
+[
+	netname(string) : "Display name"
+]
+
+
+// Dialog and Cinematics?
+
+@PointClass base(Targetname, Target, Story) = dialog : "Menu stage"
+[
+	message(string) : "Chat text"
+	message1(string) : "Menu prompt 1"
+	message2(string) : "Menu prompt 2"
+	message3(string) : "Menu prompt 3"
+]
+@PointClass base(Targetname, Story) = storyup : "Story advance"
+[
+	lip(Choices) : "Story" : 1 =
+	[
+		1 : "Advance main story"
+		16 : "Advance Optional Quest 1"
+		64 : "Advance Optional Quest 2"
+	]
+]
+@PointClass base(Targetname, Story) = storyset : "Story set"
+[
+	lip(Choices) : "Story" : 0 =
+	[
+		1 : "Main Stage 1"
+		2 : "Main Stage 2"
+		3 : "Main Stage 3"
+		4 : "Main Stage 4"
+		5 : "Main Stage 5"
+		6 : "Main Stage 6"
+		7 : "Main Stage 7"
+		8 : "Main Stage 8"
+		9 : "Main Stage 9"
+		10 : "Main Stage 10"
+		11 : "Main Stage 11"
+		12 : "Main Stage 12"
+		13 : "Main Stage 13"
+		14 : "Main Stage 14"
+		15 : "Main Stage 15"
+		16 : "Optional Stage 1"
+		32 : "Optional Stage 2"
+		48 : "Optional Stage 3"
+		64 : "Optional Stage 4"
+		80 : "Optional Stage 5"
+		96 : "Optional Stage 6"
+		112 : "Optional Stage 7"
+		128 : "Optional Stage 8"
+		144 : "Optional Stage 9"
+		160 : "Optional Stage 10"
+		176 : "Optional Stage 11"
+		192 : "Optional Stage 12"
+		208 : "Optional Stage 13"
+		224 : "Optional Stage 14"
+		240 : "Optional Stage 15"
+	]
+	spawnflags(Flags) = 
+	[
+		1 : "Absolute" : 0
+		2 : "Clear" : 0
+	]
+]
+@PointClass base(Story) = quest : "Quest text"
+[
+	impulse(Choices) : "Story" : 0 =
+	[
+		0 : "Main Stage 0"
+		1 : "Main Stage 1"
+		2 : "Main Stage 2"
+		3 : "Main Stage 3"
+		4 : "Main Stage 4"
+		5 : "Main Stage 5"
+		6 : "Main Stage 6"
+		7 : "Main Stage 7"
+		8 : "Main Stage 8"
+		9 : "Main Stage 9"
+		10 : "Main Stage 10"
+		11 : "Main Stage 11"
+		12 : "Main Stage 12"
+		13 : "Main Stage 13"
+		14 : "Main Stage 14"
+		15 : "Main Stage 15"
+		16 : "Optional Stage 1"
+		32 : "Optional Stage 2"
+		48 : "Optional Stage 3"
+		64 : "Optional Stage 4"
+		80 : "Optional Stage 5"
+		96 : "Optional Stage 6"
+		112 : "Optional Stage 7"
+		128 : "Optional Stage 8"
+		144 : "Optional Stage 9"
+		160 : "Optional Stage 10"
+		176 : "Optional Stage 11"
+		192 : "Optional Stage 12"
+		208 : "Optional Stage 13"
+		224 : "Optional Stage 14"
+		240 : "Optional Stage 15"
+	]
+	message(string) : "Quest text"
+]
+@PointClass base(Targetname, Target) = goalpoint : "Movement target"
+[
+	spawnflags(Flags) = [ 1 : "Run" : 0 ]
+]
+
+@PointClass base(Targetname, AIValues) = setai : "AI behavior change"
+[
+]
+
+@PointClass base(Targetname) = setcamera : "Change viewpoint"
+[	
+	spawnflags(Flags) = [ 1 : "Set to self" : 0 ]
+]
+
+//
+// lights
+//
+
+@baseclass color(255 255 0) = Light [
+	light(integer) : "Brightness" : 200
+	style(Choices) : "Appearance" : 0 =
+	[
+		0 : "Normal"
+		10: "Fluorescent flicker"
+		2 : "Slow, strong pulse"
+		11: "Slow pulse, noblack"
+		5 : "Gentle pulse"
+		1 : "Flicker A"
+		6 : "Flicker B"
+		3 : "Candle A"
+		7 : "Candle B"
+		8 : "Candle C"
+		4 : "Fast strobe"
+		9 : "Slow strobe"
+	]
+]
+
+@PointClass size(-8 -8 -8, 8 8 8) base(Light, Target, Targetname) = 
+	light : "Invisible lightsource"
+	[
+		spawnflags(Flags) = [ 1 : "Initially dark" : 0 ]
+	]
+@PointClass size(-8 -8 -8, 8 8 8) base(Light, Targetname) = 
+	light_fluoro : "Fluorescent light"
+	[
+		spawnflags(Flags) = [ 1 : "Initially dark" : 0 ]
+	]
+@PointClass size(-8 -8 -8, 8 8 8) base(Light, Targetname) = 
+	light_fluorospark : "Sparking fluorescent light"
+	[
+		spawnflags(Flags) = [ 1 : "Initially dark" : 0 ]
+	]
+@PointClass size(-8 -8 -8, 8 8 8) base(Light, Targetname) = 
+	light_globe : "Globe light" []
+@PointClass size(-10 -10 -12, 12 12 18) base(Light, Targetname) = 
+	light_flame_large_yellow : "Large yellow flame" []
+@PointClass size(-10 -10 -12, 12 12 18) base(Light, Targetname) = 
+	light_flame_small_yellow : "Small yellow flame" 
+	[
+		spawnflags(Flags) = [ 1 : "Initially dark" : 0 ]
+	]
+@PointClass size(-10 -10 -12, 12 12 18) base(Light, Targetname) = 
+	light_flame_small_white : "Small white flame" 
+	[
+		spawnflags(Flags) = [ 1 : "Initially dark" : 0 ]
+	]
+@PointClass size(-10 -10 -20, 10 10 20) base(Light, Targetname) = 
+	light_torch_small_walltorch : "Small walltorch" []
+
+// 
+// ambient sounds
+//
+
+@PointClass color(0 220 220) = ambient_drip : "Dripping sound" []
+@PointClass color(0 220 220) = ambient_drone : "Engine/machinery sound" []
+@PointClass color(0 220 220) = ambient_comp_hum : "Computer background sounds" []
+@PointClass color(0 220 220) = ambient_flouro_buzz : "Fluorescent buzzing sound" []
+@PointClass color(0 220 220) = ambient_light_buzz : "Buzzing sound from light" []
+@PointClass color(0 220 220) = ambient_suck_wind : "Wind sound" []
+@PointClass color(0 220 220) = ambient_swamp1 : "Frogs croaking" []
+@PointClass color(0 220 220) = ambient_swamp2 : "Frogs croaking B" []
+@PointClass color(0 220 220) = ambient_thunder : "Thunder sound" []
+@PointClass color(0 220 220) = ambient : "Ambient sound effect" 
+[
+	noise(string) : "Sound"
+]
+
+@PointClass color(128 220 128) = drip : "Sewer drip" []
+
+@PointClass color(128 220 128) size(-36 -36 0, 36 36 107) = tree : "Tree"
+[
+	skin(Choices) : "Skin" : 1 =
+	[
+		0 : "Green"
+		1 : "Snowy"
+	]
+	model(string) : "Model"
+]
+
+// 
+// moving things
+//
+
+
+
+@SolidClass base(Appearflags, Story) = func_wall : "Moving wall" []
+@SolidClass base(Story) = sign : "Information Sign" 
+[
+	netname(string) : "Mouse over text"
+	message(string) : "Click text part 1"
+	message1(string) : "Click text part 2"
+	message2(string) : "Click text part 3"
+	message3(string) : "Click text part 4"
+]
+@pointClass color(128 220 128) = storybook : "Story text"
+[
+	model(string) : "Model"
+	netname(string) : "Mouse over text"
+	message(string) : "Click text part 1"
+	message1(string) : "Click text part 2"
+	message2(string) : "Click text part 3"
+	message3(string) : "Click text part 4"
+]
+@SolidClass base(Story) = exit : "Level exit"
+[
+	netname(string) : "Display Name"
+	message(string) : "Next Level"
+]
+@SolidClass = func_fadewall : "Fadeaway wall"
+[
+]
+@SolidClass = snow : "Snow area"
+[
+	fade(integer) : "Amount (BEWARE!)"
+]
+
+@SolidClass = func_illusionary : "Solids can be walked through" []
+@SolidClass base(Targetname) = rotate_object : "Rotating door" 
+[
+	sounds(Choices) : "Sound Style" : 1 =
+	[
+		1 : "Default Door sound"
+	]
+	target(target_destination) : "Hinge target"
+	speed(integer) : "Speed" : 80
+	mangle(string) : "Final angle" : "0 90 0"
+	wait(integer) : "Delay before close" : 5
+]
+
+@SolidClass base(Targetname) = func_blockwall : "Rotating door blocker"
+[
+	netname(string) : "Display name"
+	target(target_destination) : "Door target"
+]
+//
+// triggers
+//
+
+@Solidclass base(Target, Story) = trigger_other
+[
+	spawnflags(Flags) =
+	[
+		1 : "Trigger for NPCs" : 0
+		2 : "Trigger for Player" : 1
+	]
+]
+
+
+@PointClass base(AIValues, Target, Story, Actions) size(-16 -16 -24, 16 16 32) color(255 128 0) = npc : "Non Player Character"
+[
+
+	model(string) : "Model"
+	netname(string) : "Display Name"
+	message(string) : "Chat text"
+	speed(integer) : "Movement Speed Scale"
+	noise(string) : "Attack Sound"
+	noise1(string) : "Left foot sound"
+	noise2(string) : "Right foot sound"
+	noise3(string) : "Pain Sound"
+	noise4(string) : "Die Sound"
+	wad(string) : "Tends Shop"
+	skin(integer) : "Skin"
+	message1(string) : "Menu prompt 1"
+	message2(string) : "Menu prompt 2"
+	message3(string) : "Menu prompt 3"
+	
+	team(Choices) : "Team" : 0 =
+	[
+		0 : "Player's Side"
+		1 : "Monster's Side"
+		2 : "Other"
+	]
+]
+@PointClass base(AIValues, ItemDrops, Story, Actions) size(-16 -16 -24, 16 16 32) color(255 0 0) = monster : "Monster Template"
+[
+
+	model(string) : "Model"
+	netname(string) : "Display Name"
+	speed(integer) : "Movement Speed Scale"
+	noise(string) : "Attack Sound"
+	noise1(string) : "Left foot sound"
+	noise2(string) : "Right foot sound"
+	noise3(string) : "Pain Sound"
+	noise4(string) : "Die Sound"
+	skin(integer) : "Skin"
+	frags(integer) : "Character Level"
+	finalangle(string) : "Monster Name Code"
+	team(Choices) : "Team" : 1 =
+	[
+		0 : "Player's Side"
+		1 : "Monster's Side"
+		2 : "Other"
+	]
+
+]
+@PointClass base(AIValues, ItemDrops, Actions) size(-16 -16 -24, 16 16 32) color(255 0 0) = info_class : "Monster Template"
+[
+
+	model(string) : "Model"
+	netname(string) : "Display Name"
+	speed(integer) : "Movement Speed Scale"
+	noise(string) : "Attack Sound"
+	noise1(string) : "Left foot sound"
+	noise2(string) : "Right foot sound"
+	noise3(string) : "Pain Sound"
+	noise4(string) : "Die Sound"
+	skin(integer) : "Skin"
+	frags(integer) : "Character Level"
+	finalangle(string) : "Monster Name Code"
+	team(Choices) : "Team" : 1 =
+	[
+		0 : "Player's Side"
+		1 : "Monster's Side"
+		2 : "Other"
+	]
+
+]
+@PointClass  size(-16 -16 -24, 16 16 32) color(255 0 0) = monster_spawn : "Monster spawnpoint"
+[
+
+]
+
+@PointClass base(AIValues, ItemDrops) size(-16 -16 -24, 16 16 32) color(255 0 0) = monster_skuttler : "Monster Template"
+[
+
+]
+
+@PointClass base(AIValues, ItemDrops) size(-16 -16 -24, 16 16 32) color(255 0 0) = monster_scarite : "Monster Template"
+[
+
+]
+
+@PointClass base(AIValues, ItemDrops) size(-16 -16 -24, 16 16 32) color(255 0 0) = monster_guanite : "Monster Template"
+[
+
+]
+
+@PointClass base(AIValues, ItemDrops) size(-16 -16 -24, 16 16 32) color(255 0 0) = monster_drak : "Monster Template"
+[
+
+]
+
+@PointClass base(AIValues, ItemDrops) size(-16 -16 -24, 16 16 32) color(255 0 0) = monster_horror : "Monster Template"
+[
+
+]
+
+@PointClass size(-16 -16 -24, 16 16 32) color(255 0 0) = sewer_monster : "Monster Template"
+[
+
+]
+
+@PointClass base(Story, Target) size(-16 -16 0, 16 16 5) color(0 0 255) = shopitem : "Generic Shop Item" 
+[
+	droprandom(Choices) : "Randomize" : 1 = 
+	[
+		1 : "Yes"
+		0 : "No"
+	]
+	items(integer) : "Item code number"
+	spawnflags(Flags) = [ 1 : "Infinite" : 0 ]
+	netname(string) : "Part of Shop" 
+]
+
+@PointClass base(Story, Target) size(-16 -16 0, 16 16 5) color(0 0 255) = magicitem : "Magic Shop item" 
+[
+	items(integer) : "Item code number"
+	spawnflags(Flags) = [ 1 : "Infinite" : 0 ]
+	netname(string) : "Part of Shop" : "magshop"
+]
+
+@PointClass base(Story, Target) size(-16 -16 0, 16 16 5) color(0 0 255) = armoryitem : "Armor Shop item" 
+[
+	items(integer) : "Item code number"
+	spawnflags(Flags) = [ 1 : "Infinite" : 0 ]
+	netname(string) : "Part of Shop" : "wepshop"
+]
+@PointClass base(Story, Target) size(-16 -16 0, 16 16 5) color(0 0 255) = item : "Item" 
+[
+	items(integer) : "Item code number"
+	spawnflags(Flags) = [ 1 : "Infinite" : 0 ]
+	netname(string) : "Part of Shop" 
+	menu(integer) : "Sale Price"
+]
+
+@PointClass base(Story) size(-16 -16 0, 16 16 5) color(0 0 255) = questitem : "Quest Item" 
+[
+	items(integer) : "Item code number"
+	finalangle(string) : "Name Code #1" 
+	mangle(string) : "Name Code #2"
+	max_health(integer) : "Max Durability"
+	ai(Choices) : "Loaction" : 0 =
+	[
+		0 : "Not Applicable"
+		1 : "Equipable"
+		2 : "Stackable"
+		3 : "Equip & Stack"
+		4 : "Usable"
+		6 : "Usable & Stack"
+		8 : "Has Durability"
+		9 : "Has Dur & Equip"
+		17 : "Put on head"
+		25 : "Head & Dur"
+	]
+]
+

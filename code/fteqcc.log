@@ -1,0 +1,147 @@
+Source file: progs.src
+outputfile: ../progs.dat
+compiling system/system.qc
+compiling proto.qc
+compiling defs.qc
+compiling items/ival.qc
+compiling spells/sval.qc
+compiling precache.qc
+compiling system/cmds.qc
+compiling system/const.qc
+compiling system/extend.qc
+compiling system/main.qc
+compiling system/dummys.qc
+compiling subs/math.qc
+in function recode (line 70),
+subs/math.qc:76: warning: recode: not all control paths return a value
+compiling subs/save.qc
+compiling subs/subs.qc
+compiling subs/combat.qc
+compiling subs/exp.qc
+compiling subs/stats.qc
+compiling subs/vis.qc
+compiling screens/go.qc
+compiling menu/print.qc
+compiling spells/pspell.qc
+compiling monster/pmonster.qc
+compiling items/pitem.qc
+compiling menu/menu.qc
+compiling menu/stats.qc
+compiling menu/buy.qc
+compiling menu/inven.qc
+compiling menu/console.qc
+compiling menu/invenlst.qc
+compiling menu/spells.qc
+compiling menu/repair.qc
+compiling menu/sell.qc
+compiling menu/quest.qc
+compiling menu/main_m.qc
+compiling menu/dialog.qc
+compiling menu/dead.qc
+compiling menu/useon.qc
+compiling menu/identify.qc
+compiling items/questitem.qc
+compiling items/itemstat.qc
+compiling items/dur.qc
+compiling items/randitem.qc
+in function randitem (line 9),
+items/randitem.qc:10: warning: Local "value" defined with name of a global
+compiling items/pickup.qc
+in function AutoEquip (line 26),
+items/pickup.qc:26: warning: AutoEquip: not all control paths return a value
+compiling items/drop.qc
+compiling items/use.qc
+in function Use (line 27),
+items/use.qc:208: warning: Missing semicolon at end of definition
+compiling items/equip.qc
+compiling spells/spells.qc
+compiling spells/sstats.qc
+in function spell_range (line 42),
+spells/sstats.qc:4: warning: Missing semicolon at end of definition
+compiling spells/spfx.qc
+compiling spells/cast.qc
+compiling subs/anim.qc
+in function AnimatePlayer (line 36),
+subs/anim.qc:355: warning: You may wish to add brackets after that ! operator
+compiling player/parms.qc
+compiling player/camera.qc
+compiling player/stuff.qc
+compiling player/click.qc
+compiling player/cursor.qc
+compiling player/sbar.qc
+compiling player/impulse.qc
+compiling player/client.qc
+in function PlayerPreThink (line 31),
+player/client.qc:45: warning: You may wish to add brackets after that ! operator
+in function PlayerPostThink (line 32),
+player/client.qc:147: warning: You may wish to add brackets after that ! operator
+compiling monster/npcs.qc
+compiling monster/monster.qc
+compiling map/world.qc
+compiling map/items.qc
+compiling map/cin.qc
+compiling map/door2.qc
+compiling map/misc.qc
+compiling map/triggers.qc
+compiling map/lights.qc
+compiling map/ambient.qc
+compiling map/tree.qc
+compiling map/snow.qc
+compiling map/chests.qc
+compiling map/barrels.qc
+compiling map/sign.qc
+compiling map/exit.qc
+compiling map/fadewall.qc
+compiling map/monster.qc
+Recognised progs as NetQuake server gamecode
+Progs should run on any Quake executor
+at global scope,
+defs.qc:7: warning: string_null  no references
+defs.qc:19: warning: delay  no references
+defs.qc:19: warning: light_lev  no references
+defs.qc:23: warning: killtarget  no references
+defs.qc:24: warning: pos1  no references
+defs.qc:24: warning: pos2  no references
+defs.qc:44: warning: bkup_model  no references
+defs.qc:71: warning: obs_count  no references
+defs.qc:128: warning: cursorpos  no references
+defs.qc:136: warning: target4  no references
+items/equip.qc:36: warning: i  no references
+items/equip.qc:36: warning: loc  no references
+items/equip.qc:60: warning: i  no references
+spells/sstats.qc:4: warning: m  no references
+spells/spfx.qc:7: warning: e  no references
+subs/anim.qc:34: warning: move  no references
+subs/anim.qc:34: warning: death  no references
+subs/anim.qc:34: warning: attack  no references
+subs/anim.qc:34: warning: pain  no references
+subs/anim.qc:34: warning: misc  no references
+player/parms.qc:46: warning: h  no references
+player/parms.qc:47: warning: f  no references
+player/cursor.qc:58: warning: movement  no references
+player/sbar.qc:5: warning: f  no references
+monster/monster.qc:16: warning: mn  no references
+map/cin.qc:213: warning: i  no references
+warning: Model progs/b_inv.bsp was used but not precached
+ 35368 strofs (of 1000000)
+ 20118 numstatements (of 524288)
+   474 numfunctions (of 16384)
+  2218 numglobaldefs (of 32768)
+   272 numfielddefs (243 unique) (of 2048)
+  2117 numpr_globals (of 65536)
+Writing ../progs.dat
+241952 TOTAL SIZE
+Writing ../progs.lno
+ 49 unique precache_sounds
+ 20 unique precache_models
+Compile Complete
+
+optres_shortenifnots 110
+optres_overlaptemps 7164
+optres_constantarithmatic 74
+optres_nonvec_parms 5520
+optres_assignments 1018
+optres_unreferenced 87
+optres_dupconstdefs 236
+numtemps 85
+35 warnings
